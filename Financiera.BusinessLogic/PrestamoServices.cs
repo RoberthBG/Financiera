@@ -12,10 +12,15 @@ namespace Financiera.BusinessLogic
     {
         private readonly ICliente clienteDB;
         private readonly ITipoCliente tipoClienteDB;
-        public PrestamoServices(ICliente cliente, ITipoCliente tipoCliente)
+        private readonly IPrestamo prestamoDB;
+        private readonly ITipoPrestamo tipoPrestamoDB;
+        public PrestamoServices(ICliente cliente, ITipoCliente tipoCliente,
+            IPrestamo prestamo, ITipoPrestamo tipoPrestamo)
         {
             clienteDB = cliente;
             tipoClienteDB = tipoCliente;
+            prestamoDB = prestamo;
+            tipoPrestamoDB = tipoPrestamo;
         }
 
         public List<Cliente> ListarClientes()
@@ -30,7 +35,33 @@ namespace Financiera.BusinessLogic
 
         public TipoCliente ObtenerTipoClientePorID(int id)
         {
-            return tipoClienteDB.ObtenerPorId((int)id);
+            return tipoClienteDB.ObtenerPorId(id);
+        }
+
+        public List<Prestamo> ListarPrestamos()
+        {
+            return prestamoDB.Listar();
+        }
+
+        public Prestamo CrearPrestamo(Prestamo nuevoPrestamo)
+        {
+            int nuevoID = prestamoDB.Registrar(nuevoPrestamo);
+            return prestamoDB.ObtenerPorId(nuevoID);
+        }
+
+        public List<TipoPrestamo> ListarTiposPrestamo()
+        {
+            return tipoPrestamoDB.Listar();
+        }
+
+        public Prestamo ObtenerPrestamoPorID(int id)
+        {
+            return prestamoDB.ObtenerPorId(id);
+        }
+
+        public TipoPrestamo ObtenerTipoPrestamoPorID(int id)
+        {
+            return tipoPrestamoDB.ObtenerPorId(id);
         }
     }
 }

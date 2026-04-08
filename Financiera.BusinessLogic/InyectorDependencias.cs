@@ -15,6 +15,8 @@ namespace Financiera.BusinessLogic
         {
             services.AddScoped<ICliente, ClienteRepositorio>();
             services.AddScoped<ITipoCliente, TipoClienteRepositorio>();
+            services.AddScoped<IPrestamo, PrestamoRepositorio>();
+            services.AddScoped<ITipoPrestamo, TipoPrestamoRepositorio>();
             services.AddScoped<PrestamoServices>();
         }
     }

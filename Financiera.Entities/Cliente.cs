@@ -16,5 +16,13 @@ namespace Financiera.Entities
         public string Email { get; set; } = string.Empty;
         public int TipoClienteID { get; set; }
         public bool Activo { get; set; }
+
+        public string NombreCompleto
+        {
+            get
+            {
+                return $"{Apellidos}, {Nombres}";
+            }
+        }
     }
 }
